@@ -1,0 +1,24 @@
+{
+    "name": "oangia/curl",
+    "description": "Curl class",
+    "type": "php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "oangia",
+            "email": "hqnhatdn@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "oangia\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    }
+}
