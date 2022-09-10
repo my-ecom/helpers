@@ -2,9 +2,9 @@
 namespace oangia;
 
 class NCrypt {
-    public static function encrypt($data, $secret_key)
+    public static function encrypt($text, $secret_key)
     {
-        $plaintext = $data;
+        $plaintext = $text;
         $ivlen = openssl_cipher_iv_length($cipher = 'AES-128-CBC');
         $iv = openssl_random_pseudo_bytes($ivlen);
         $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $secret_key, $options = OPENSSL_RAW_DATA, $iv);
@@ -13,9 +13,9 @@ class NCrypt {
         return $ciphertext;
     }
 
-    public static function decrypt($data, $secret_key)
+    public static function decrypt($text, $secret_key)
     {
-        $c = base64_decode($data);
+        $c = base64_decode($text);
         $ivlen = openssl_cipher_iv_length($cipher = 'AES-128-CBC');
         $iv = substr($c, 0, $ivlen);
         $hmac = substr($c, $ivlen, $sha2len = 32);
