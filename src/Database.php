@@ -11,7 +11,7 @@ class Database
   	function __construct($fetch = 'row')
   	{
         $this->fetch = $fetch;
-        $this->mysqli = @new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+        $this->mysqli = @new \mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
         if ($this->mysqli->connect_errno) {
             Response::json(['message' => "Failed to connect to MySQL: " . $this->mysqli->connect_error], 500);
         }

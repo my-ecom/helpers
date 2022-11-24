@@ -107,6 +107,10 @@ class CUrl
                 curl_setopt($this->curl, CURLOPT_PUT, true);
                 curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
                 break;
+            case 'PATCH':
+                curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
+                curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
+                break;
             case 'DELETE':
                 curl_setopt($this->curl, CURLOPT_CUSTOMREQUEST, 'DELETE');
                 curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
