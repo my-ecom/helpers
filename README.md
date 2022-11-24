@@ -37,3 +37,11 @@ Response::json(['data' => '', 'message' => 'Success'], 200);
 $data = Request::json($required = ['id']);
 $id = Request::get('id');
 ```
+
+### Push tags
+Current version v1.0.7
+
+```
+git tag -a v1.0.7 -m "v1.0.7"
+git push --tags
+```
