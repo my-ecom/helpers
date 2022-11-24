@@ -18,7 +18,8 @@
             "oangia\\": "src/"
         },
         "files": [
-            "src/helpers.php"
+            "src/helpers/helpers.php",
+            "src/helpers/string.php"
         ]
     }
 }

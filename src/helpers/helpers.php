@@ -1,13 +1,14 @@
 <?php
+// general helper functions
 
-function debugSetting()
+function debug_setting()
 {
     ini_set('display_errors', '1');
     ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
 }
 
-function timeoutSetting()
+function timeout_setting()
 {
     ini_set('memory_limit', '-1');
     set_time_limit(0);
@@ -23,49 +24,31 @@ function dd($var, $die=true)
     }
 }
 
-function slugify($text, string $divider = '-')
+function getUserIP()
 {
-    #echo $text . '<br/>';
-    // replace non letter or digits by divider
-    if (! $text) {
-        return false;
+    // Get real visitor IP behind CloudFlare network
+    if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+              $_SERVER['REMOTE_ADDR'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+              $_SERVER['HTTP_CLIENT_IP'] = $_SERVER["HTTP_CF_CONNECTING_IP"];
+    }
+    $client  = @$_SERVER['HTTP_CLIENT_IP'];
+    $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
+    $remote  = $_SERVER['REMOTE_ADDR'];
+
+    if(filter_var($client, FILTER_VALIDATE_IP))
+    {
+        $ip = $client;
+    }
+    elseif(filter_var($forward, FILTER_VALIDATE_IP))
+    {
+        $ip = $forward;
+    }
+    else
+    {
+        $ip = $remote;
     }
 
-    $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
-    if (! $text) {
-        return false;
-    }
-    // transliterate
-    $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-    // remove unwanted characters
-    $text = preg_replace('~[^-\w]+~', '', $text);
-    // trim
-    $text = trim($text, $divider);
-    // remove duplicate divider
-    $text = preg_replace('~-+~', $divider, $text);
-    // lowercase
-    $text = strtolower($text);
-    if (! $text) {
-        return false;
-    }
-    return $text;
-}
-
-function generateRandomString($length = 10) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
-
-function get_string_between($str, $str1, $str2, $deep = 1)
-{
-    $str = explode($str1, $str);
-    $str = explode($str2, $str[$deep]);
-    return $str[0];
+    return $ip;
 }
 
 function array_unique_recursive($array)
@@ -86,14 +69,45 @@ function is_valid_url($url)
     return filter_var($url, FILTER_VALIDATE_URL) !== FALSE;
 }
 
-function toObject($obj)
+function to_object($obj)
 {
     return (object)$obj;
 }
 
-function getCookie($key)
+function __cookie($key)
 {
     return isset($_COOKIE[$key]) ? $_COOKIE[$key] : '';
+}
+
+function __get($key) {
+    return isset($_GET[$key]) ? $_GET[$key] : '';
+}
+
+function __post($key) {
+    return isset($_POST[$key]) ? $_POST[$key] : '';
+}
+
+function is_json($string) {
+   json_decode($string);
+   return json_last_error() === JSON_ERROR_NONE;
+}
+
+function is_mobile() {
+    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+
+function is_xhr() {
+    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest')
+    {
+        return true;
+    }
+    return false;
+}
+
+function get_ob($callback) {
+    ob_start();
+    $callback();
+    return ob_get_clean();
 }
 
 function array_export($data, $deep=1)
