@@ -57,9 +57,9 @@ $firestore = new FireStore($fb);
 $response = $firestore->getCollection('users', '123'));
 ```
 ### Push tags
-Current version v1.0.8
+Current version v1.0.8b
 
 ```
-git tag -a v1.0.9 -m "v1.0.9"
+git tag -a v1.0.8b -m "v1.0.8b"
 git push --tags
 ```
