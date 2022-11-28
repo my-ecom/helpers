@@ -8,5 +8,11 @@ class Firebase {
         $this->config = $config;
     }
 
+    public function urlGet($database, $collection, $id) {
+        return $this->base_url . $this->config['projectId'] . '/databases/' . $database . '/documents/' . $collection . '/' . $id . '?key=' . $this->config['apiKey'];
+    }
 
+    public function urlPost($database, $collection, $id = '') {
+        return $this->base_url . $this->config['projectId'] . '/databases/' . $database . '/documents/' . $collection . '?' . ($id ? 'documentId=' . $id . '&': '') . 'key=' . $this->config['apiKey'];
+    }
 }
