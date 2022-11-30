@@ -28,21 +28,21 @@ echo $response;
 
 # NCrypt
 ```
-use oangia\NCrypt;
+use oangia\helpers\NCrypt;
 
 $encryptTxt = NCrypt::encrypt('hello world', 'secret_key_a1c32efbc');
 echo NCrypt::decrypt($encryptTxt, 'secret_key_a1c32efbc');
 ```
 # Response
 ```
-use oangia\Response;
+use oangia\web\Response;
 
 Response::json(['data' => '', 'message' => 'Success'], 200);
 ```
 
 # Request
 ```
-use oangia\Request;
+use oangia\web\Request;
 
 $data = Request::json($required = ['id']);
 $id = Request::get('id');
@@ -57,9 +57,9 @@ $firestore = new FireStore($fb);
 $response = $firestore->getCollection('users', '123'));
 ```
 ### Push tags
-Current version v1.0.8b
+Current version v1.0.10
 
 ```
-git tag -a v1.0.8b -m "v1.0.8b"
+git tag -a v1.0.11 -m "v1.0.11"
 git push --tags
 ```

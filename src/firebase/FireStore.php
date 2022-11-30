@@ -18,21 +18,23 @@ class FireStore {
     }
 
     public function addDoc($collection, $data, $id = '') {
+        $fields = $this->generateFields($data);
         $url = $this->fb->urlPost($this->database, $collection, $id);
         $curl = new CUrl();
         $curl->json_data();
         $curl->json();
-        $response = $curl->connect('POST', $url, $data);
+        $response = $curl->connect('POST', $url, $fields);
 
         return $response;
     }
 
     public function setDoc($collection, $data, $id) {
+        $fields = $this->generateFields($data);
         $url = $this->fb->urlGet($this->database, $collection, $id);// . '&updateMask.fieldPaths=last_access';
         $curl = new CUrl();
         $curl->json_data();
         $curl->json();
-        $response = $curl->connect('PATCH', $url, $data);
+        $response = $curl->connect('PATCH', $url, $fields);
 
         return $response;
     }
@@ -43,5 +45,21 @@ class FireStore {
         $response = $curl->connect('DELETE', $url);
 
         return $response;
+    }
+
+    private function generateFields($data) {
+        $fields = ['fields' => [
+
+        ]];
+        foreach ($data as $key => $value) {
+            if (is_int($value)) {
+                $fields['fields'][$key] = ['integerValue' => $value];
+            } elseif(is_numeric($value)) {
+                $fields['fields'][$key] = ['doubleValue' => $value];
+            } else {
+                $fields['fields'][$key] = ['stringValue' => $value];
+            }
+        }
+        return $fields;
     }
 }
