@@ -72,7 +72,6 @@ class Route {
     }
 
     private static function runController($controller) {
-        Route::connectDB();
         if (is_array($controller)) {
             $obj = new $controller[0];
             $response = call_user_func_array([$obj, $controller[1]], Route::$params);
@@ -84,11 +83,6 @@ class Route {
         }
         echo $response;
         die();
-    }
-
-    private static function connectDB() {
-        global $db;
-        $db = Database::connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
     }
 
     private static function parseUri() {
