@@ -19,7 +19,10 @@
         },
         "files": [
             "src/helpers/helpers.php",
-            "src/helpers/client.php"
+            "src/helpers/client.php",
+            "src/helpers/string.php",
+            "src/helpers/array.php",
+            "src/helpers/file.php"
         ]
     }
 }

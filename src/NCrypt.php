@@ -1,5 +1,5 @@
 <?php
-namespace oangia\helpers;
+namespace oangia;
 
 class NCrypt {
     public static function encrypt($text, $secret_key)

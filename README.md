@@ -26,40 +26,18 @@ $response = $curl->connect('POST', 'http://nhathuynh.com/api/v1/test', $data);
 echo $response;
 ```
 
-# NCrypt
+### NCrypt
 ```
-use oangia\helpers\NCrypt;
+use oangia\NCrypt;
 
 $encryptTxt = NCrypt::encrypt('hello world', 'secret_key_a1c32efbc');
 echo NCrypt::decrypt($encryptTxt, 'secret_key_a1c32efbc');
 ```
-# Response
-```
-use oangia\web\Response;
 
-Response::json(['data' => '', 'message' => 'Success'], 200);
-```
-
-# Request
-```
-use oangia\web\Request;
-
-$data = Request::json($required = ['id']);
-$id = Request::get('id');
-```
-# Firebase
-```
-use oangia\firebase\Firebase;
-use oangia\firebase\FireStore;
-
-$fb = new Firebase(['apiKey' => 'AIzaSyDBLyiGjroIhQndhe0T3iac39GalX-z9Lo', 'projectId' => 'myecom-f0a26']);
-$firestore = new FireStore($fb);
-$response = $firestore->getCollection('users', '123'));
-```
+### Current version
+- v1.0.15
 ### Push tags
-Current version v1.0.10
-
 ```
-git tag -a v1.0.11 -m "v1.0.11"
+git tag -a v1.0.0 -m "v1.0.0"
 git push --tags
 ```
