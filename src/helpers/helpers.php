@@ -96,23 +96,3 @@ function get_string_between($str, $str1, $str2, $deep = 1)
     $str = explode($str2, $str[$deep]);
     return $str[0];
 }
-
-function add_client_info(&$data) {
-    $data['ip'] = get_user_ip();
-    $data['user_agent'] = get_user_agent();
-}
-
-function view($name, $args = []) {
-    foreach ($args as $key => $value) {
-        ${$key} = $value;
-    }
-    $page = debug_backtrace()[1]['function'];
-    ob_start();
-    include(APP_PATH . '/public/cache/templates/' . $_SERVER['HTTP_HOST'] . '_main.php');
-    $template = ob_get_clean();
-    //dd($template);
-    ob_start();
-    include(APP_PATH . '/views/' . $name . '.php');
-    $content = ob_get_clean();
-    return str_replace('{{content}}', $content, $template);
-}
