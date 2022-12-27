@@ -21,4 +21,16 @@ class Response
         echo json_encode($data);
         die();
     }
+
+    public static function xml($content) {
+        header('Content-Type: application/xml; charset=utf-8');
+        echo $content;
+        die();
+    }
+
+    public static function txt($content) {
+        header('Content-Type: text/plain; charset=utf-8');
+        echo $content;
+        die();
+    }
 }

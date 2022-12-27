@@ -1,12 +1,13 @@
 <?php
 namespace oangia\web;
+use oangia\helpers\iString;
 
 class Request
 {
     public static function json($required = [])
     {
         $content = trim(file_get_contents("php://input"));
-        if (! $this->isJson($content)) {
+        if (! iString::isJson($content)) {
             return false;
         }
         $data = json_decode($content, true);
@@ -16,6 +17,42 @@ class Request
             }
         }
         return $data;
+    }
+
+    public static function validate($fields) {
+        $data = Request::json();
+        foreach ($fields as $field => $validate) {
+            $validate = explode('|', $validate);
+            foreach ($validate as $item) {
+                if (strpos($item, ':') !== false) {
+                    $item = explode(':', $item);
+                    $value = $item[1];
+                    $item = $item[0];
+                }
+                switch ($item) {
+                    case 'required':
+                        if (! isset($data[$field]) || ! $data[$field]) {
+                            Response::json(['message' => $field . ' is required'], 400);
+                        }
+                        break;
+                    case 'email':
+                        if (!filter_var($data[$field], FILTER_VALIDATE_EMAIL)) {
+                            Response::json(['message' => 'Email not valid'], 400);
+                        }
+                        break;
+                    case 'min':
+                        if (strlen($data[$field]) < $value) {
+                            Response::json(['message' => $field . ' field require min ' . $value . ' characters'], 400);
+                        }
+                        break;
+                    case 'max':
+                        if (strlen($data[$field]) > $value) {
+                            Response::json(['message' => $field . ' field require max ' . $value . ' characters'], 400);
+                        }
+                        break;
+                }
+            }
+        }
     }
 
     public static function is_xhr() {

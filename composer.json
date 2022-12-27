@@ -19,7 +19,7 @@
         },
         "files": [
             "src/helpers/helpers.php",
-            "src/web/sus.php"
+            "src/helpers/client.php"
         ]
     }
 }
