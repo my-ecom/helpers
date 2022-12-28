@@ -34,8 +34,18 @@ $encryptTxt = NCrypt::encrypt('hello world', 'secret_key_a1c32efbc');
 echo NCrypt::decrypt($encryptTxt, 'secret_key_a1c32efbc');
 ```
 
+# Firebase
+```
+use oangia\firebase\Firebase;
+use oangia\firebase\FireStore;
+
+$fb = new Firebase(['apiKey' => 'AIzaSyDBLyiGjroIhQndhe0T3iac39GalX-z9Lo', 'projectId' => 'myecom-f0a26']);
+$firestore = new FireStore($fb);
+$response = $firestore->getCollection('users', '123'));
+```
+
 ### Current version
-- v1.0.15
+- v1.1.0
 ### Push tags
 ```
 git tag -a v1.0.0 -m "v1.0.0"

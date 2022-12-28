@@ -1,6 +1,6 @@
 {
     "name": "oangia/helpers",
-    "description": "All helpers class, function",
+    "description": "All helpers class, function, plugins",
     "type": "php",
     "license": "MIT",
     "authors": [
