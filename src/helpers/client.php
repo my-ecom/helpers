@@ -9,7 +9,7 @@ function get_user_ip() {
     $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
     $remote  = $_SERVER['REMOTE_ADDR'];
 
-    if(filter_var($client, FILTER_VALIDATE_IP))
+    if(filter_var( $client, FILTER_VALIDATE_IP ))
     {
         $ip = $client;
     }
