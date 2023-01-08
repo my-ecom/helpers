@@ -33,24 +33,24 @@ function is_mobile() {
     return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", get_user_agent());
 }
 
-function __cookie($key)
+function __cookie($key, $default = '')
 {
     return isset($_COOKIE[$key]) ? $_COOKIE[$key] : '';
 }
 
-function __server($key)
+function __server($key, $default = '')
 {
     return isset($_SERVER[$key]) ? $_SERVER[$key] : '';
 }
 
-function __get($key) {
+function __get($key, $default = '') {
     return isset($_GET[$key]) ? $_GET[$key] : '';
 }
 
-function __session($key) {
+function __session($key, $default = '') {
     return isset($_SESSION[$key]) ? $_SESSION[$key] : '';
 }
 
-function __post($key) {
+function __post($key, $default = '') {
     return isset($_POST[$key]) ? $_POST[$key] : '';
 }
